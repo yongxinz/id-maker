@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/empty.proto";
+
+service Gid{
+    rpc Ping(google.protobuf.Empty)returns (PingReply);
+    rpc GetId(IdRequest)returns (IdReply);
+    rpc GetSnowId(google.protobuf.Empty)returns (SnowIdReply);
+    rpc CreateTag(CreateTagRequest)returns (CreateTagReply);
+}
+
+message Status {
+    int32  code = 1; // 自定义错误码
+    string msg = 2;  // 错误信息(只有code不等于200的时候返回)
+}
+
+message PingReply {
+    Status status = 1;
+    string data = 2;
+}
+
+message IdRequest {
+    string tag = 1;
+}
+
+message IdReply{
+    Status status = 1;
+    int64  id = 2;
+}
+
+message SnowIdReply{
+    Status status = 1;
+    int64  id = 2;
+}
+
+message CreateTagRequest {
+    string tag = 1;
+    int64 maxId = 2;
+    int64 step = 3;
+    string remark = 4;
+}
+
+message CreateTagReply {
+    Status status = 1;
+}

@@ -1,0 +1,17 @@
+app:
+  name: 'id-maker'
+  version: '1.0.0'
+
+http:
+  port: '8080'
+
+grpc:
+  port: '50051'
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'id-maker'
+
+mysql:
+  max_idle_conns: 10
+  max_open_conns: 20
