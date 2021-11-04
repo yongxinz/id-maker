@@ -28,14 +28,14 @@ services:
     depends_on:
       - mysql
 
-  # integration:
-  #   build:
-  #     context: .
-  #     dockerfile: integration-test/Dockerfile
-  #   container_name: integration
-  #   image: integration
-  #   depends_on:
-  #     - app
+  integration:
+    build:
+      context: .
+      dockerfile: integration-test/Dockerfile
+    container_name: integration
+    image: integration
+    depends_on:
+      - app
 
 # volumes:
 #   my-data: ./db
