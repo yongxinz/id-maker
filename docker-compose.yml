@@ -22,7 +22,7 @@ services:
     container_name: app
     image: app
     environment:
-      MYSQL_URL: 'root:123456@localhost:3306/dev?charset=utf8&parseTime=True&loc=Local'
+      MYSQL_URL: 'root:123456@tcp(mysql:3306)/dev?charset=utf8&parseTime=True&loc=Local'
     ports:
       - 8080:8080
     depends_on:

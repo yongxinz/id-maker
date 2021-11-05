@@ -54,8 +54,9 @@ func healthCheck(attempts int) error {
 // HTTP POST: /tag.
 func TestHTTPCreateTag(t *testing.T) {
 	body := `{
-		"biz_tag": "test",
+		"biz_tag": "test7",
 		"step": 100,
+		"max_id": 1
 	}`
 	Test(t,
 		Description("CreateTag Success"),
@@ -63,11 +64,10 @@ func TestHTTPCreateTag(t *testing.T) {
 		Send().Headers("Content-Type").Add("application/json"),
 		Send().Body().String(body),
 		Expect().Status().Equal(http.StatusOK),
-		// Expect().Body().JSON().JQ(".translation").Equal("text for translation"),
 	)
 
 	body = `{
-		"biz_tag": "test",
+		"biz_tag": "test"
 	}`
 	Test(t,
 		Description("CreateTag Fail"),
@@ -85,6 +85,16 @@ func TestHTTPGetId(t *testing.T) {
 		Description("GetId Success"),
 		Get(basePath+"/id/test"),
 		Expect().Status().Equal(http.StatusOK),
-		Expect().Body().String().Contains(`{"id":`),
+		Expect().Body().Int64().GreaterThan(0),
+	)
+}
+
+// HTTP GET: /snowid.
+func TestHTTPGetSnowId(t *testing.T) {
+	Test(t,
+		Description("GetSnowId Success"),
+		Get(basePath+"/snowid"),
+		Expect().Status().Equal(http.StatusOK),
+		Expect().Body().Int64().GreaterThan(0),
 	)
 }
